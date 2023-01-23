@@ -1,4 +1,6 @@
-<h2><?= esc($title) ?></h2>
+<?= $this->extend('layouts/default') ?>
+
+<?= $this->section('content') ?>
 
 <?= session()->getFlashdata('error') ?>
 <?= validation_list_errors() ?>
@@ -19,3 +21,4 @@
         Create news item
     </button>
 </form>
+<?= $this->endSection() ?>

@@ -16,9 +16,7 @@ class News extends BaseController
             'title' => 'News archive',
         ];
 
-        return view('templates/header', $data)
-            . view('news/index')
-            . view('templates/footer');
+        return view('news/index', $data);
     }
 
     public function show($slug = null)
@@ -33,9 +31,7 @@ class News extends BaseController
 
         $data['title'] = $data['news']['title'];
 
-        return view('templates/header', $data)
-            . view('news/show')
-            . view('templates/footer');
+        return view('news/show', $data);
     }
 
 
@@ -46,22 +42,21 @@ class News extends BaseController
         // Checks whether the form is submitted.
         if (!$this->request->is('post')) {
             // The form is not submitted, so returns the form.
-            return view('templates/header', ['title' => 'Create a news item'])
-                . view('news/create')
-                . view('templates/footer');
+            return view('news/create', ['title' => 'Create a news item']);
         }
 
         $post = $this->request->getPost(['title', 'body']);
 
         // Checks whether the submitted data passed the validation rules.
-        if (!$this->validateData($post, [
+
+        $isValid = $this->validateData($post, [
             'title' => 'required|max_length[255]|min_length[3]',
             'body'  => 'required|max_length[5000]|min_length[10]',
-        ])) {
+        ]);
+
+        if (!$isValid) {
             // The validation fails, so returns the form.
-            return view('templates/header', ['title' => 'Create a news item'])
-                . view('news/create')
-                . view('templates/footer');
+            return view('news/create', ['title' => 'Create a news item']);
         }
 
         $model = model(NewsModel::class);
@@ -73,8 +68,7 @@ class News extends BaseController
         ]);
 
         $data = ['title' => "Create a news item successfully", 'item' => $post['title']];
-        return view('templates/header', $data)
-            . view('news/success',  $data)
-            . view('templates/footer');
+
+        return view('news/success', $data);
     }
 }

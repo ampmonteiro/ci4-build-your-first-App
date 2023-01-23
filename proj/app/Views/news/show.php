@@ -1,2 +1,7 @@
-<h2><?= esc($news['title']) ?></h2>
+<?= $this->extend('layouts/default') ?>
+
+<?= $this->section('content') ?>
+
 <p><?= esc($news['body']) ?></p>
+
+<?= $this->endSection() ?>
