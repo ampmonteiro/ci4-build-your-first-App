@@ -36,6 +36,7 @@ $routes->get('/', 'Home::index');
 
 $routes->group('news', function ($routes) {
     $routes->match(['get', 'post'], 'create', [News::class, 'create']);
+    $routes->post('delete', [News::class, 'delete']);
     $routes->get('(:segment)', [News::class, 'show']);
     $routes->get('', [News::class, 'index']);
 });

@@ -31,6 +31,8 @@ class News extends BaseController
 
         $data['title'] = $data['news']['title'];
 
+        helper('form');
+
         return view('news/show', $data);
     }
 
@@ -70,5 +72,18 @@ class News extends BaseController
         $data = ['title' => "Create a news item successfully", 'item' => $post['title']];
 
         return view('news/success', $data);
+    }
+
+
+    public function delete()
+    {
+
+        $id = $this->request->getPost(['news_id']);
+
+        $model = model(NewsModel::class);
+
+        $model->delete($id);
+
+        return redirect()->to('/news');
     }
 }
