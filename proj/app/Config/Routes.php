@@ -34,9 +34,11 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-$routes->match(['get', 'post'], 'news/create', [News::class, 'create']);
-$routes->get('news/(:segment)', [News::class, 'show']);
-$routes->get('news', [News::class, 'index']);
+$routes->group('news', function ($routes) {
+    $routes->match(['get', 'post'], 'create', [News::class, 'create']);
+    $routes->get('(:segment)', [News::class, 'show']);
+    $routes->get('', [News::class, 'index']);
+});
 
 $routes->get('pages', [Pages::class, 'index']);
 $routes->get('(:segment)', [Pages::class, 'show']);
