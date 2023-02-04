@@ -4,7 +4,10 @@
 
 <p><?= esc($news['body']) ?></p>
 
-<section style="display: flex;">
+<section style="margin-top:2rem;display: flex; gap: 10rem;">
+    <a href="/news/<?= esc($news['slug'], 'url') ?>/edit">
+        Edit article
+    </a>
 
     <form action="/news/delete" method="post">
         <?= csrf_field() ?>

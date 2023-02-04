@@ -74,10 +74,58 @@ class News extends BaseController
         return view('news/success', $data);
     }
 
+    public function edit($slug)
+    {
+        $model = model(NewsModel::class);
+
+        $data['news'] = $model->get($slug);
+
+        if (empty($data['news'])) {
+            throw new PageNotFoundException('Cannot find the news item: ' . $slug);
+        }
+
+        $data['title'] = 'Edit: ' . $data['news']['title'];
+
+        helper('form');
+
+        return view('news/edit', $data);
+    }
+
+    public function update()
+    {
+        $post = $this->request->getPost(['title', 'body']);
+
+        // Checks whether the submitted data passed the validation rules.
+
+        $isValid = $this->validateData($post, [
+            'title' => 'required|max_length[255]|min_length[3]',
+            'body'  => 'required|max_length[5000]|min_length[10]',
+        ]);
+
+        if (!$isValid) {
+            $slug = $this->request->getPost(['slug']);
+            // The validation fails, so returns the form.
+            return redirect()->back()->withInput();
+        }
+
+        $model = model(NewsModel::class);
+
+        $id = $this->request->getPost(['news_id']);
+
+        $slug = url_title($post['title'], '-', true);
+
+        $model->update($id, [
+            'title' => $post['title'],
+            'slug'  => $slug,
+            'body'  => $post['body'],
+        ]);
+
+        return redirect()->to("/news/{$slug}");
+    }
+
 
     public function delete()
     {
-
         $id = $this->request->getPost(['news_id']);
 
         $model = model(NewsModel::class);
