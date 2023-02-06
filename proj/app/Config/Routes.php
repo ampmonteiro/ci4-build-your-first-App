@@ -35,7 +35,10 @@ $routes->set404Override();
 $routes->get('/', 'Home::index');
 
 $routes->group('news', function ($routes) {
-    $routes->match(['get', 'post'], 'create', [News::class, 'create']);
+    // $routes->match(['get', 'post'], 'create', [News::class, 'create']);
+
+    $routes->get('create', [News::class, 'create']);
+    $routes->post('store', [News::class, 'store']);
 
     $routes->post('delete', [News::class, 'delete']);
 

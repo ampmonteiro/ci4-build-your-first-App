@@ -5,7 +5,7 @@
 <?= session()->getFlashdata('error') ?>
 <?= validation_list_errors() ?>
 
-<?= form_open('news/create') ?>
+<?= form_open('news/store') ?>
 <p>
     <label for="title">Title</label>
     <input id="title" name="title" value="<?= old('title') ?>">

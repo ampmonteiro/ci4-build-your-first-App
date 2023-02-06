@@ -36,17 +36,14 @@ class News extends BaseController
         return view('news/show', $data);
     }
 
-
     public function create()
     {
         helper('form');
+        return view('news/create', ['title' => 'Create a news item']);
+    }
 
-        // Checks whether the form is submitted.
-        if (!$this->request->is('post')) {
-            // The form is not submitted, so returns the form.
-            return view('news/create', ['title' => 'Create a news item']);
-        }
-
+    public function store()
+    {
         $post = $this->request->getPost(['title', 'body']);
 
         // Checks whether the submitted data passed the validation rules.
@@ -64,15 +61,18 @@ class News extends BaseController
 
         $model = model(NewsModel::class);
 
+        $newSlug = url_title($post['title'], '-', true);
+
         $model->save([
             'title' => $post['title'],
-            'slug'  => url_title($post['title'], '-', true),
+            'slug'  => $newSlug,
             'body'  => $post['body'],
         ]);
 
-        $data = ['title' => "Create a news item successfully", 'item' => $post['title']];
+        return redirect()->to("/news/{$newSlug}");
 
-        return view('news/success', $data);
+        // $data = ['title' => "Create a news item successfully", 'item' => $post['title']];
+        // return view('news/success', $data);
     }
 
     public function edit($slug)
