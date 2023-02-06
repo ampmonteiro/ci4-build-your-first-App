@@ -8,12 +8,12 @@
 <?= form_open('news/create') ?>
 <p>
     <label for="title">Title</label>
-    <input id="title" name="title" value="<?= set_value('title') ?>">
+    <input id="title" name="title" value="<?= old('title') ?>">
 </p>
 
 <p>
     <label for="body">Text</label>
-    <textarea id="body" name="body" cols="45" rows="4"><?= set_value('body') ?></textarea>
+    <textarea id="body" name="body" cols="45" rows="4"><?= old('body') ?></textarea>
 </p>
 
 <button>

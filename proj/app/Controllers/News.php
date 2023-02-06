@@ -58,7 +58,8 @@ class News extends BaseController
 
         if (!$isValid) {
             // The validation fails, so returns the form.
-            return view('news/create', ['title' => 'Create a news item']);
+            #return view('news/create', ['title' => 'Create a news item']);
+            return redirect()->back()->withInput();
         }
 
         $model = model(NewsModel::class);
@@ -103,7 +104,6 @@ class News extends BaseController
         ]);
 
         if (!$isValid) {
-            $slug = $this->request->getPost(['slug']);
             // The validation fails, so returns the form.
             return redirect()->back()->withInput();
         }
