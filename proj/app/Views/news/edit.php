@@ -7,8 +7,7 @@
 
 <?= form_open(
     'news/update',
-    [],
-    ['news_id' => esc($news['id'])]
+    hidden: ['news_id' => esc($news['id'])]  # take advantage of named args since php 8
 ) ?>
 <p>
     <label for="title">Title</label>

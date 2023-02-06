@@ -10,8 +10,7 @@
     </a>
     <?= form_open(
         'news/delete',
-        [],
-        ['news_id' => esc($news['id'])]
+        hidden: ['news_id' => esc($news['id'])] # take advantage of named args since php 8
     ) ?>
     <button>Delete</button>
     <?= form_close() ?>
