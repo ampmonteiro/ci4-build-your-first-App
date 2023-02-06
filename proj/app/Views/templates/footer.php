@@ -10,7 +10,8 @@
 
     <div class="copyrights">
 
-        <p>&copy; <?= date('Y') ?> AMPM
+        <p>&copy; <?= date('Y') ?>
+            <a href="https://github.com/ampmonteiro">AMPM</a>
         </p>
 
     </div>
