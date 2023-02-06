@@ -57,3 +57,23 @@ footer .environment {
 h1 {
     margin-bottom: 1rem;
 }
+
+.form-control {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: 1rem 0;
+}
+
+.form-control input,
+.form-control textarea {
+    padding: 0.5rem;
+}
+
+button {
+    padding: 0.8rem;
+    background: #DD4814;
+    ;
+    border: none;
+    color: #fff;
+}
