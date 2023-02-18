@@ -16,7 +16,7 @@
 
 <p class="form-control">
     <label for="body">Text</label>
-    <textarea id="body" name="body" cols="45" rows="4"><?= old('body') ?? $news['title'] ?></textarea>
+    <textarea id="body" name="body" cols="45" rows="4"><?= old('body') ?? $news['body'] ?></textarea>
 </p>
 
 <button>
